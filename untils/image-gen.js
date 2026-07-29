@@ -8,7 +8,7 @@ const TMP_DIR = path.join(__dirname, '../tmp');
 if (!fs.existsSync(TMP_DIR)) fs.mkdirSync(TMP_DIR, { recursive: true });
 
 /**
- * Tải ảnh từ URL về file tạm
+ 
  * @param {string} url
  * @param {string} filePath
  * @returns {Promise<string>}
@@ -43,7 +43,7 @@ function downloadImage(url, filePath) {
  */
 async function handleImageGenCommand(interaction, prompt) {
   // Reply ngay "đang tạo ảnh"
-  await interaction.reply({ content: `🎨 Đang tạo ảnh: **${prompt}**...` });
+  await interaction.reply({ content: `Đang tạo ảnh: **${prompt}**...` });
 
   try {
     const encoded = encodeURIComponent(prompt);
@@ -56,14 +56,14 @@ async function handleImageGenCommand(interaction, prompt) {
 
     // Edit reply thành ảnh
     await interaction.editReply({
-      content: `🖼️ **${prompt}**`,
+      content: ` **${prompt}**`,
       files: [attachment],
     });
 
     fs.unlink(filePath, () => {});
   } catch (err) {
-    console.error('❌ Image gen lỗi:', err.message);
-    await interaction.editReply({ content: `❌ Tạo ảnh thất bại: ${err.message}` });
+    console.error(' Image gen lỗi:', err.message);
+    await interaction.editReply({ content: ` Tạo ảnh thất bại: ${err.message}` });
   }
 }
 
