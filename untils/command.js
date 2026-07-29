@@ -23,59 +23,59 @@ module.exports = function registerInteractionHandler(
     // ── /setchannel ───────────────────────────────────────────────────────────
     if (interaction.isChatInputCommand() && interaction.commandName === 'setchannel') {
       if (!checkAdmin(interaction))
-        return interaction.reply({ content: '❌ Mày không có quyền dùng lệnh này.', ephemeral: true });
+        return interaction.reply({ content: ' bạn không có quyền dùng lệnh này.', ephemeral: true });
 
       const targetId = interaction.options.getString('id') ?? interaction.channelId;
       if (activeChannels.has(targetId)) {
         activeChannels.delete(targetId);
         removeChannel(targetId);
-        return interaction.reply({ content: `🔕 Bot đã tắt ở channel <#${targetId}>`, ephemeral: true });
+        return interaction.reply({ content: ` Bot đã tắt chanel <#${targetId}>`, ephemeral: true });
       } else {
         activeChannels.add(targetId);
         saveChannel(targetId);
-        return interaction.reply({ content: `✅ Bot sẽ trả lời tin nhắn trong channel <#${targetId}>`, ephemeral: true });
+        return interaction.reply({ content: ` AI  channel <#${targetId}>`, ephemeral: true });
       }
     }
 
     // ── /stopsetchannel ───────────────────────────────────────────────────────
     if (interaction.isChatInputCommand() && interaction.commandName === 'stopsetchannel') {
       if (!checkAdmin(interaction))
-        return interaction.reply({ content: '❌ Mày không có quyền dùng lệnh này.', ephemeral: true });
+        return interaction.reply({ content: 'bạn không có quyền dùng lệnh này.', ephemeral: true });
 
       const targetId = interaction.options.getString('id') ?? interaction.channelId;
       if (!activeChannels.has(targetId))
-        return interaction.reply({ content: `⚠️ Bot chưa được bật ở channel <#${targetId}>`, ephemeral: true });
+        return interaction.reply({ content: ` Bot chưa được bật  channel <#${targetId}>`, ephemeral: true });
 
       activeChannels.delete(targetId);
       removeChannel(targetId);
-      return interaction.reply({ content: `🔕 Đã tắt auto reply ở channel <#${targetId}>`, ephemeral: true });
+      return interaction.reply({ content: `stop auto reply ở channel <#${targetId}>`, ephemeral: true });
     }
 
     // ── /feeling ──────────────────────────────────────────────────────────────
     if (interaction.isChatInputCommand() && interaction.commandName === 'feeling') {
       const guildId = interaction.guild?.id;
-      if (!guildId) return interaction.reply({ content: '❌ Lệnh này chỉ dùng trong server.', ephemeral: true });
-      if (!checkAdmin(interaction)) return interaction.reply({ content: '❌ Mày không có quyền dùng lệnh này.', ephemeral: true });
+      if (!guildId) return interaction.reply({ content: ' Lệnh này chỉ dùng trong server.', ephemeral: true });
+      if (!checkAdmin(interaction)) return interaction.reply({ content: 'bạn không có quyền dùng lệnh này.', ephemeral: true });
       feelingGuilds.add(guildId);
       saveFeelingGuild(guildId, true);
-      return interaction.reply({ content: '💬 Đã bật chế độ cảm xúc!', ephemeral: true });
+      return interaction.reply({ content: 'chế độ cảm xúc', ephemeral: true });
     }
 
     // ── /nofeeling ────────────────────────────────────────────────────────────
     if (interaction.isChatInputCommand() && interaction.commandName === 'nofeeling') {
       const guildId = interaction.guild?.id;
-      if (!guildId) return interaction.reply({ content: '❌ Lệnh này chỉ dùng trong server.', ephemeral: true });
-      if (!checkAdmin(interaction)) return interaction.reply({ content: '❌ Mày không có quyền dùng lệnh này.', ephemeral: true });
+      if (!guildId) return interaction.reply({ content: ' Lệnh này chỉ dùng trong server.', ephemeral: true });
+      if (!checkAdmin(interaction)) return interaction.reply({ content: ' Mày không có quyền dùng lệnh này.', ephemeral: true });
       feelingGuilds.delete(guildId);
       saveFeelingGuild(guildId, false);
-      return interaction.reply({ content: '😶 Đã tắt chế độ cảm xúc.', ephemeral: true });
+      return interaction.reply({ content: ' tắt chế độ cảm xúc.', ephemeral: true });
     }
 
     // ── /voice ────────────────────────────────────────────────────────────────
     if (interaction.isChatInputCommand() && interaction.commandName === 'voice') {
       const guildId = interaction.guild?.id;
-      if (!guildId) return interaction.reply({ content: '❌ Lệnh này chỉ dùng trong server.', ephemeral: true });
-      if (!checkAdmin(interaction)) return interaction.reply({ content: '❌ Mày không có quyền dùng lệnh này.', ephemeral: true });
+      if (!guildId) return interaction.reply({ content: 'Lệnh này chỉ dùng trong server.', ephemeral: true });
+      if (!checkAdmin(interaction)) return interaction.reply({ content: 'bạn không có quyền dùng lệnh này.', ephemeral: true });
       voiceGuilds.add(guildId);
       saveVoiceGuild(guildId, true);
       return interaction.reply({ content: '🔊 Đã bật chế độ voice! Bot sẽ gửi audio khi tin nhắn dài hơn 150 ký tự.', ephemeral: true });
@@ -84,11 +84,11 @@ module.exports = function registerInteractionHandler(
     // ── /novoice ──────────────────────────────────────────────────────────────
     if (interaction.isChatInputCommand() && interaction.commandName === 'novoice') {
       const guildId = interaction.guild?.id;
-      if (!guildId) return interaction.reply({ content: '❌ Lệnh này chỉ dùng trong server.', ephemeral: true });
-      if (!checkAdmin(interaction)) return interaction.reply({ content: '❌ Mày không có quyền dùng lệnh này.', ephemeral: true });
+      if (!guildId) return interaction.reply({ content: ' Lệnh này chỉ dùng trong server.', ephemeral: true });
+      if (!checkAdmin(interaction)) return interaction.reply({ content: ' Mày không có quyền dùng lệnh này.', ephemeral: true });
       voiceGuilds.delete(guildId);
       saveVoiceGuild(guildId, false);
-      return interaction.reply({ content: '🔇 Đã tắt chế độ voice.', ephemeral: true });
+      return interaction.reply({ content: ' Đã tắt chế độ voice.', ephemeral: true });
     }
 
     // ── /image ────────────────────────────────────────────────────────────────
@@ -126,9 +126,9 @@ module.exports = function registerInteractionHandler(
       { role: 'user', content: followUp },
     ]);
 
-    if (status !== 200) return interaction.editReply('❌ Groq lỗi.');
+    if (status !== 200) return interaction.editReply(' Ai lỗi.');
     const reply = body.choices?.[0]?.message?.content?.trim();
-    if (!reply) return interaction.editReply('❌ Không có phản hồi.');
+    if (!reply) return interaction.editReply(' Không có phản hồi.');
 
     appendHistory(userName, 'user', followUp);
     appendHistory(userName, 'assistant', reply);
