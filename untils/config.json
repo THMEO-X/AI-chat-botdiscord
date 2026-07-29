@@ -1,0 +1,23 @@
+{
+  "colors": {
+    "code": "0x3a00fc",
+    "affirmation": "0x00c853",
+    "question": "0xffd600",
+    "error": "0xff1744",
+    "default": "0x888888"
+  },
+  "buttons": {
+    "code": [
+      { "customId": "code_1", "style": "Danger" },
+      { "customId": "code_2", "style": "Secondary" },
+      { "customId": "code_3", "style": "Primary" },
+      { "customId": "code_no", "style": "Secondary" }
+    ],
+    "thmeo-x": [
+      { "customId": "chat_1", "style": "Primary" },
+      { "customId": "chat_2", "style": "Success" },
+      { "customId": "chat_3", "style": "Primary" },
+      { "customId": "chat_ok", "style": "Secondary" }
+    ]
+  }
+}
